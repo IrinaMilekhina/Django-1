@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from datetime import date
 
 # Create your views here.
 # функции = контроллеры = вьюхи
@@ -15,6 +15,7 @@ def index(request):
 def products(request):
     context = {
         'title': 'GeekShop - Каталог',
+        'date': date.today(),
         'products': [
             {'name': 'Худи черного цвета с монограммами adidas Originals', 'price': 6090,
              'description': 'Мягкая ткань для свитшотов. Стиль и комфорт – это образ жизни.',
