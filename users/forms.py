@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, ValidationError
 import re
 from django import forms
 
@@ -34,8 +34,8 @@ class UserRegistrationForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
 
-    # def clean_username(self):
-    #     username = self.cleaned_data['username']
-    #     if not re.match("^.*[^A-zА-яЁё].*$", username):
-    #         raise forms.ValidationError('Логин точно неверный!')
-    #     return self.cleaned_data
+    def clean_first_name(self):
+        first_name = self.cleaned_data['first_name']
+        if re.match("^.*[^A-zА-яЁё].*$", first_name):
+            raise ValidationError('Имя не должно содержать цифры')
+        return self.cleaned_data
