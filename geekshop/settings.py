@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
+    'djmoney',  # указание установленной библиотеки django-money
 ]
 
 MIDDLEWARE = [
