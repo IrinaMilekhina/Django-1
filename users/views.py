@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.urls import reverse
 
 from users.forms import UserLoginForm
+from users.forms import UserRegistrationForm
 
 
 def login(request):
@@ -27,7 +28,17 @@ def login(request):
 
 
 def registration(request):
+    if request.method == 'POST':
+        form = UserRegistrationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('users:login'))
+        else:
+            print(form.errors)
+    else:
+        form = UserRegistrationForm()
     context = {
         'title': 'GeekShop - Регистрация',
+        'form': form,
     }
     return render(request, 'users/registration.html', context)
