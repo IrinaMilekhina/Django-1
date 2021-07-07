@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'users',
+    'baskets',
     'djmoney',  # указание установленной библиотеки django-money
 ]
 
