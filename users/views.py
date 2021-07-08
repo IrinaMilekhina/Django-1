@@ -51,6 +51,8 @@ def profile(request):
         'title': 'GeekShop - Личный кабинет',
         'form': form,
         'baskets': Basket.objects.all(),
+        'total_sum': sum([el.product.price * el.quantity for el in Basket.objects.all()]),
+        'total_quantity': sum([el.quantity for el in Basket.objects.all()]),
     }
     return render(request, 'users/profile.html', context)
 
