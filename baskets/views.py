@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect
 
 from products.models import Product
 from baskets.models import Basket
@@ -17,3 +17,7 @@ def baskets_add(request, product_id):
         basket.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+def basket_remove(request, id):
+    basket = Basket.objects.get(id=id)
+    basket.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
