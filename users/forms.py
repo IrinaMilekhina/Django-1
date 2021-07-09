@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 import re
 from django import forms
 
@@ -39,3 +39,15 @@ class UserRegistrationForm(UserCreationForm):
         if re.search(r'\d+', first_name):
             raise forms.ValidationError('Имя не должно содержать цифры')
         return first_name
+
+
+class UserProfileForm(UserChangeForm):
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4', 'readonly': True}))
+    email = forms.CharField(widget=forms.EmailInput(attrs={'class': 'form-control py-4', 'readonly': True}))
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control py-4'}))
+    image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'custom-file-input'}), required=False)
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'image', 'username', 'email')
