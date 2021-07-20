@@ -15,10 +15,12 @@ class Basket(models.Model):
     def sum(self):
         return self.quantity * self.product.price
 
-    @classmethod
-    def total_sum(cls):
-        return sum([el.product.price * el.quantity for el in cls.objects.all()])
+    @property
+    def baskets(self):
+        return Basket.objects.filter(user=self.user)
 
-    @classmethod
-    def total_quantity(cls):
-        return sum([el.quantity for el in cls.objects.all()])
+    def total_sum(self):
+        return sum(basket.sum() for basket in self.baskets)
+
+    def total_quantity(self):
+        return sum(basket.quantity for basket in self.baskets)
