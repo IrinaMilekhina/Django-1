@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'baskets',
     'djmoney',  # указание установленной библиотеки django-money
+    'admins',
 ]
 
 MIDDLEWARE = [
