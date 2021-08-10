@@ -6,13 +6,10 @@ import json
 from products.models import Product, ProductCategory
 
 
-# Create your views here.
 # функции = контроллеры = вьюхи
 
 def index(request):
-    context = {
-        'title': 'Geekshop'
-    }
+    context = {'title': 'Geekshop'}
     return render(request, 'products/index.html', context)
 
 
